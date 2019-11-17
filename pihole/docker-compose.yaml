@@ -31,12 +31,12 @@ services:
     cap_add:
       - NET_ADMIN
     restart: always
-    #labels:
-    #- "traefik.enable=true"
-      #- "traefik.http.routers.pihole.rule=Host(`${URL0_SAN}`) || Host(`${URL_IP}`)"
-      #- "treafik.http.routers.pihole.entrypoints=web,websecure"
-      #- "traefik.http.routers.pihole.tls=true"
-      #- "traefik.http.routers.pihole.tls.certresolver=mydnschallenge"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pihole.rule=Host(`${URL0_SAN}`)"
+      - "treafik.http.routers.pihole.entrypoints=websecure"
+      - "traefik.http.routers.pihole.tls=true"
+      - "traefik.http.routers.pihole.tls.certresolver=mydnschallenge"
 
 networks:
     traefiknet:
