@@ -45,7 +45,7 @@ services:
       - "traefik.http.routers.pihole80.entrypoints=web"
       - "traefik.http.services.pihole80.loadbalancer.server.port=80"
 #----------------------------------------------------------------------------------
-      #sinkhole for port 443
+      #sinkhole for port 443 by IP
       - "traefik.http.routers.pihole443.rule=Host(`${HOST_IP}`)"
       - "traefik.http.routers.pihole443.service=pihole443@docker"
       - "traefik.http.routers.pihole443.entrypoints=websecure"
