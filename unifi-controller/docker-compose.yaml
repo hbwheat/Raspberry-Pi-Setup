@@ -23,6 +23,8 @@ services:
       #- 8880:8880
       - 6789:6789       # speed test
     restart: always
+    expose:
+      - 8443
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.unifi.rule=Host(`${URL0_SAN}`)"
@@ -32,7 +34,7 @@ services:
       - "traefik.http.routers.unifi.tls.certresolver=mydnschallenge"
      # - "traefik.http.routers.unifi.middlewares=unifiproxy"
       
-      - "traefik.http.services.unifi.loadbalancer.server.scheme=https"
+      - "traefik.http.services.unifi.loadbalancer.server.scheme=http"
       - "traefik.http.services.unifi.loadbalancer.server.port=8443"
       #- "traefik.http.services.unifi.loadbalancer.passhostheader=true"
 
