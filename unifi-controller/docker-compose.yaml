@@ -25,7 +25,7 @@ services:
     restart: always
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.unifi.rule=Host(`${URL0_SAN}` && PathPrefix(`/*`))"
+      - "traefik.http.routers.unifi.rule=Host(`${URL0_SAN}`) || (Host(`${URL0_SAN}`) && PathPrefix(`/*`))"
       - "traefik.http.routers.unifi.entrypoints=websecure"
       - "traefik.http.routers.unifi.service=unifi@docker"
       - "traefik.http.routers.unifi.tls=true"
