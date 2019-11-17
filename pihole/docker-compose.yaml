@@ -6,7 +6,7 @@ services:
     container_name: pihole
     image: pihole/pihole:latest
     networks:
-      - treafiknet
+      - traefiknet
     ports:
       - "53:53/tcp" #dns
       - "53:53/udp" #dns
