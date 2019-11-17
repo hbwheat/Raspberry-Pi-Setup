@@ -22,6 +22,7 @@ services:
       DNS1: 1.1.1.1
       DNS2: 9.9.9.9
       ServerIP: ${HOST_IP}
+      VIRTUAL_HOST: ${URL0_SAN}
     # Volumes store your data between container upgrades
     volumes:
        - ./data/etc-pihole/:/etc/pihole/
@@ -53,11 +54,13 @@ services:
 #----------------------------------------------------------------------------------
       #admin access
       - "traefik.http.routers.piholeadmin.rule=Host(`${URL1_SAN}`)"
-      - "traefik.http.middlewares.piholeadmin.addprefix.prefix=/admin"
       - "traefik.http.routers.piholeadmin.entrypoints=websecure"
       - "traefik.http.routers.piholeadmin.service=piholeadmin@docker"
       - "traefik.http.routers.piholeadmin.tls=true"
       - "traefik.http.routers.piholeadmin.tls.certresolver=mydnschallenge"
+      - "traefik.http.middlewares.piholeadmin-redirect.redirectregex.regex=^https://${URL1_SAN}*"
+      - "traefik.http.middlewares.piholeadmin-redirect.redirectregex.replacement=https://${URL0_SAN}/admin/"
+      - "traefik.http.routers.piholeadmin.middlewares=piholeadmin-redirect"
       - "traefik.http.services.piholeadmin.loadbalancer.server.scheme=http"
       - "traefik.http.services.piholeadmin.loadbalancer.server.port=80"
 
