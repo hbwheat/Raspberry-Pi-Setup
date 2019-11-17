@@ -28,7 +28,7 @@ services:
       - "--log.format=json"
       - "--api.insecure=true"
       - "--api.dashboard=true"
-      - "--insecureskipverify=true"
+      - "--serverstransport.insecureskipverify=true"
       - "--metrics.prometheus.entryPoint=metrics"
       - "--metrics.prometheus.addentrypointslabels"
       - "--metrics.prometheus.addserviceslabels=true"
