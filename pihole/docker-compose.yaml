@@ -47,8 +47,8 @@ services:
       - "traefik.http.routers.pihole443.rule=Host(`${URL0_SAN}`) || Host(`${HOST_IP}`)"
       - "traefik.http.routers.pihole443.service=pihole443@docker"
       - "traefik.http.routers.pihole443.entrypoints=websecure"
-      - "traefik.http.routers.piholeadmin.tls=true"
-      - "traefik.http.routers.piholeadmin.tls.certresolver=mydnschallenge"
+      - "traefik.http.routers.pihole443.tls=true"
+      - "traefik.http.routers.pihole443.tls.certresolver=mydnschallenge"
       - "traefik.http.services.pihole443.loadbalancer.server.port=443"
 #----------------------------------------------------------------------------------
       #admin access
