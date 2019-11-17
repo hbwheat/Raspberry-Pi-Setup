@@ -3,7 +3,6 @@
 ## Static configuration
 serversTransport:
   insecureSkipVerify: true
-  
+
   rootCAs:
-    - foo.crt
-    - bar.crt
+    - unifi.crt
