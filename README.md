@@ -7,7 +7,7 @@ https://desertbot.io/blog/headless-raspberry-pi-4-ssh-wifi-setup
 
 The gist...
 
-You'll download the Rapsiban Lite OS Image here:
+You'll download the Raspbian Lite OS Image here:
 https://www.raspberrypi.org/downloads/raspbian/
 
 On Mac use balenaEtcher to write the os img file to the SD card.
@@ -15,7 +15,7 @@ https://www.balena.io/etcher/
 
 Simply insert the SD card, boot up Etcher, and select the img downloaded. Then Etcher will take care of the rest.
 
-Create a blank file on the root (the SD card will be labled "boot", use the root of that drive) of the SD card titled "ssh". This tells Rasbian to start the ssh server on boot.
+Create a blank file on the root (the SD card will be labeled "boot", use the root of that drive) of the SD card titled "ssh". This tells Raspbian to start the ssh server on boot.
 
 Insert the SD card into the Raspberry Pi, plug in ethernet and power.
 
@@ -31,7 +31,7 @@ default hostname: raspberrypi
 default username: pi
 default password: raspberry
 ```
-ssh into the rapsberry pi
+ssh into the raspberry pi
 ```
 ssh pi@raspberrypi.local
 ```
@@ -43,7 +43,7 @@ sudo raspi-config
 
 ### Static IP
 
-To set a staic IP we'll need to edit the ``` vi /etc/dhcpd.conf ``` file.
+To set a static IP we'll need to edit the ``` vi /etc/dhcpd.conf ``` file.
 
 Default files: 
 
@@ -111,7 +111,7 @@ slaac private
 
 We'll edit the above file to set a static IP. 
 
-Add the following at the bottom of the file. I downloaded Vim:  ```sudo apt isntall vim -y```
+Add the following at the bottom of the file. I downloaded Vim:  ```sudo apt install vim -y```
 ```
 interface eth0
 static ip_address=192.168.1.12/24
@@ -162,7 +162,7 @@ sudo apt-get update -y
 sudo apt-get install docker-ce -y --no-install-recommends
 ```
 
-The officle Docker CE will try to install aufs-dkms as a dependecy however it will fail. The default is to now use overlayfs2. 
+The official Docker CE will try to install aufs-dkms as a dependency however it will fail. The default is to now use overlayfs2. 
 Reference: https://github.com/raspberrypi/linux/issues/3021#issuecomment-508704040
 
 
