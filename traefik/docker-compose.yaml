@@ -46,8 +46,9 @@ services:
       #- "--certificatesresolvers.mydnschallenge.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory" #for testing the challenge and API keys
       - "--certificatesresolvers.mydnschallenge.acme.email=${MYDNSCHALLENGE_ACME_EMAIL}"
       - "--certificatesResolvers.mydnschallenge.acme.dnsChallenge.delayBeforeCheck=5"
-
       - "--certificatesresolvers.mydnschallenge.acme.storage=/letsencrypt/acme.json"
+      - "--serverstransport.insecureskipverify=true"
+      - "--serverstransport.rootcas=/etc/traefik/certs/CAs.crt"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.api.rule=Host(`${URL0_SAN}`)"
