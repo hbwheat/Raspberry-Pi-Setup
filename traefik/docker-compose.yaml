@@ -46,7 +46,7 @@ services:
       - "--certificatesresolvers.mydnschallenge.acme.email=${MYDNSCHALLENGE_ACME_EMAIL}"
       - "--certificatesResolvers.mydnschallenge.acme.dnsChallenge.delayBeforeCheck=5"
       - "--certificatesresolvers.mydnschallenge.acme.storage=/letsencrypt/acme.json"
-      - "--serverstransport.insecureskipverify=true"
+      #- "--serverstransport.insecureskipverify=true"
       - "--serverstransport.rootcas=/etc/traefik/certs/CAs.crt"
     labels:
       - "traefik.enable=true"
