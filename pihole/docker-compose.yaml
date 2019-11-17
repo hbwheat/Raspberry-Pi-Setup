@@ -1,0 +1,40 @@
+version: "3.3"
+
+# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    networks:
+      - treafiknet
+    ports:
+      - "53:53/tcp" #dns
+      - "53:53/udp" #dns
+      - "67:67/udp" #dhcp
+      - "8080:80/tcp"
+      #- "443:443/tcp"
+    environment:
+      TZ: 'America/New_York'
+      WEBPASSWORD: ${WEBPASSWORD}
+    # Volumes store your data between container upgrades
+    volumes:
+       - ./data/etc-pihole/:/etc/pihole/
+       - ./data/etc-dnsmasq.d/:/etc/dnsmasq.d/
+    dns:
+      - 127.0.0.1
+      - 1.1.1.1
+    # Recommended but not required (DHCP needs NET_ADMIN)
+    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+    cap_add:
+      - NET_ADMIN
+    restart: always
+    labels:
+    #- "traefik.enable=true"
+      #- "traefik.http.routers.pihole.rule=Host(`${URL0_SAN}`) || Host(`${URL_IP}`)"
+      #- "treafik.http.routers.pihole.entrypoints=web,websecure"
+      #- "traefik.http.routers.pihole.tls=true"
+      #- "traefik.http.routers.pihole.tls.certresolver=mydnschallenge"
+
+networks:
+    traefiknet:
+        external: true
