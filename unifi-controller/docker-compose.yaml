@@ -2,7 +2,7 @@ version: "3.3"
 
 services:
   unifi-controller:
-    image: linuxserver/unifi-controller:arm64v8-latest
+    image: linuxserver/unifi-controller:arm32v7-latest
     container_name: unifi-controller
     environment:
       - PUID=1000
