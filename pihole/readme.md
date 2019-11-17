@@ -67,3 +67,4 @@ Alternative https://discourse.pi-hole.net/t/dhcp-with-docker-compose-and-bridge-
 
 Trying with a seperate container. 
 Need to use ```sudo docker-compose build```
+

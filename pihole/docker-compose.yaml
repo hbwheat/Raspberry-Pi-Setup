@@ -26,7 +26,7 @@ services:
     hostname: pihole.local
     networks:
       - traefiknet
-      #- piholedhcp
+      - piholedhcp
     ports:
       - "53:53/tcp" #dns
       - "53:53/udp" #dns
@@ -105,5 +105,5 @@ services:
 networks:
     traefiknet:
         external: true
-    #piholedhcp:
-        #external: true
+    piholedhcp:
+        external: true
