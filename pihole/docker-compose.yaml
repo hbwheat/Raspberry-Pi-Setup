@@ -13,7 +13,8 @@ services:
         SERVER: "pihole"
     restart: always
     network_mode: host
-    depends_on: pihole
+    depends_on: 
+      - pihole
     cap_add:
       - NET_ADMIN
 
