@@ -14,6 +14,8 @@ services:
       - "67:67/udp" #dhcp
       #- "80:80/tcp"
       #- "443:443/tcp"
+    expose:
+     - 80
     environment:
       TZ: 'America/New_York'
       WEBPASSWORD: ${WEBPASSWORD}
