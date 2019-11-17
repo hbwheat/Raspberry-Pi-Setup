@@ -49,6 +49,7 @@ services:
       - "traefik.http.middlewares.unifiproxy.headers.stsincludesubdomains=true"
       - "traefik.http.middlewares.unifiproxy.headers.stspreload=true"
       - "traefik.http.middlewares.unifiproxy.headers.contenttypenosniff=true"
+      - "traefik.http.middlewares.unifiproxy.headers.sslforcehost=true"
 
 networks:
     traefiknet:
