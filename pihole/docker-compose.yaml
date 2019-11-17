@@ -11,6 +11,11 @@ services:
         INTERFACE_UPSTREAM: "br-976c9dfa3dbb"
         INTERFACE_DOWNSTREAM: "eth0"
         SERVER: "pihole"
+    restart: always
+    network_mode: host
+    depends_on: pihole
+    cap_add:
+      - NET_ADMIN
 
   pihole:
     container_name: pihole
@@ -19,7 +24,7 @@ services:
     hostname: pihole.local
     networks:
       - traefiknet
-      - piholedhcp
+      #- piholedhcp
     ports:
       - "53:53/tcp" #dns
       - "53:53/udp" #dns
@@ -36,6 +41,7 @@ services:
       DNS2: 9.9.9.9
       ServerIP: ${HOST_IP}
       VIRTUAL_HOST: ${URL0_SAN}
+      DNSMASQ_LISTENING: all
     # Volumes store your data between container upgrades
     volumes:
        - ./data/etc-pihole/:/etc/pihole/
@@ -97,5 +103,5 @@ services:
 networks:
     traefiknet:
         external: true
-    piholedhcp:
-        external: true
+    #piholedhcp:
+        #external: true
