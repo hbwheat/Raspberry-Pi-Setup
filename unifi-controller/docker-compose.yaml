@@ -38,9 +38,9 @@ services:
       - "traefik.http.services.unifi.loadbalancer.server.port=8443"
       - "traefik.http.services.unifi.loadbalancer.passhostheader=true"
 
-      - "traefik.http.middlewares.unifiproxy.headers.accesscontrolallowcredentials=true"
-      - "traefik.http.middlewares.unifiproxy.headers.accesscontrolexposeheaders=Access-Control-Allow-Origin,Access-Control-Allow-Credentials"
-      - "traefik.http.middlewares.unifiproxy.headers.addvaryheader=true"
+      #- "traefik.http.middlewares.unifiproxy.headers.accesscontrolallowcredentials=true"
+      #- "traefik.http.middlewares.unifiproxy.headers.accesscontrolexposeheaders=Access-Control-Allow-Origin,Access-Control-Allow-Credentials"
+      #- "traefik.http.middlewares.unifiproxy.headers.addvaryheader=true"
       - "traefik.http.middlewares.unifiproxy.headers.framedeny=true"
       - "traefik.http.middlewares.unifiproxy.headers.sslredirect=true"
       - "traefik.http.middlewares.unifiproxy.headers.browserxssfilter=true"
@@ -49,8 +49,7 @@ services:
       - "traefik.http.middlewares.unifiproxy.headers.stsincludesubdomains=true"
       - "traefik.http.middlewares.unifiproxy.headers.stspreload=true"
       - "traefik.http.middlewares.unifiproxy.headers.contenttypenosniff=true"
-    #  - "traefik.http.middlewares.unifiproxy.headers.browserxssfilter=true"
-
+      
 networks:
     traefiknet:
         external: true
