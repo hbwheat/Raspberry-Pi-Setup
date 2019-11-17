@@ -44,10 +44,12 @@ services:
       - "traefik.http.routers.pihole80.service=pihole80@docker"
       - "traefik.http.routers.pihole80.entrypoints=web"
       - "traefik.http.services.pihole80.loadbalancer.server.port=80"
-      - "traefik.http.routers.piholeadmin.middlewares=piholeadmin80-redirect"
+      - "traefik.http.routers.pihole80.middlewares=piholeadmin80-redirect,piholeadmin80ip-redirect"
 
       - "traefik.http.middlewares.piholeadmin80-redirect.redirectregex.regex=^http://${URL0_SAN}/admin*"
       - "traefik.http.middlewares.piholeadmin80-redirect.redirectregex.replacement=https://${URL0_SAN}/admin"
+      - "traefik.http.middlewares.piholeadmin80ip-redirect.redirectregex.regex=^http://${HOST_IP}/admin*"
+      - "traefik.http.middlewares.piholeadmin80ip-redirect.redirectregex.replacement=https://${URL0_SAN}/admin"
 
 #----------------------------------------------------------------------------------
       #sinkhole for port 443 by IP
