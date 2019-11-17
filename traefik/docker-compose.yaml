@@ -13,6 +13,7 @@ services:
     volumes:
       - ./dynamic-conf.yaml:/etc/traefik/dynamic-conf.yaml:ro
       - ./data/traefik.log:/etc/traefik/traefik.log
+      - ./data/certs:/etc/traefik/certs:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./data/acme.json:/letsencrypt/acme.json:rw #used by LetsEncrypt for HTTPs
       #- ./certs:/srv/certs:ro #for self signed certs and CA
