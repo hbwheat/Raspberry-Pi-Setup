@@ -4,7 +4,7 @@ services:
   unifi-controller:
     image: linuxserver/unifi-controller:arm32v7-latest
     container_name: unifi-controller
-    hostname: unifi-controller
+    hostname: unifi
     networks:
       - traefiknet
     environment:
