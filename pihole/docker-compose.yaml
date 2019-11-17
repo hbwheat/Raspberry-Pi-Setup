@@ -14,7 +14,6 @@ services:
       - "67:67/udp" #dhcp server 
       #- "80:80/tcp"
       #- "443:443/tcp"
-    network_mode: "host"
     expose:
      - 80
      - 443
@@ -85,4 +84,6 @@ services:
 
 networks:
     traefiknet:
+        external: true
+    host:
         external: true
