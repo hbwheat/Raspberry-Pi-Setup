@@ -13,7 +13,7 @@ services:
     ports:
       - "53:53/tcp" #dns
       - "53:53/udp" #dns
-      - "67:67/udp" #dhcp server 
+      #- "67:67/udp" #dhcp server 
       #- "80:80/tcp"
       #- "443:443/tcp"
     expose:
