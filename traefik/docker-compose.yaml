@@ -4,6 +4,7 @@ services:
   traefik:
     image: arm32v6/traefik:v2.0.5
     container_name: traefik
+    restart: always
     networks:
       - traefiknet
     ports:
