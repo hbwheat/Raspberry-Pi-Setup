@@ -32,13 +32,17 @@ services:
       #- "traefik.http.routers.unifi.service=unifi@docker"
       - "traefik.http.routers.unifi.tls=true"
       - "traefik.http.routers.unifi.tls.certresolver=mydnschallenge"
-     # - "traefik.http.routers.unifi.middlewares=unifiproxy"
+      - "traefik.http.routers.unifi.middlewares=unifiproxy"
       
       - "traefik.http.services.unifi.loadbalancer.server.scheme=https"
       - "traefik.http.services.unifi.loadbalancer.server.port=8443"
-      #- "traefik.http.services.unifi.loadbalancer.passhostheader=true"
+      - "traefik.http.services.unifi.loadbalancer.passhostheader=true"
 
-    #  - "traefik.http.middlewares.unifiproxy.headers.framedeny=true"
+      - "traefik.http.middlewares.unifiproxy.headers.accesscontrolallowcredentials=true"
+      - "traefik.http.middlewares.unifiproxy.headers.accesscontrolexposeheaders=Access-Control-Allow-Origin,Access-Control-Allow-Credentials"
+      - "traefik.http.middlewares.unifiproxy.headers.addvaryheader=true"
+      - "traefik.http.middlewares.unifiproxy.headers.framedeny=true"
+
     #  - "traefik.http.middlewares.unifiproxy.headers.stsseconds=420000000"
     #  - "traefik.http.middlewares.unifiproxy.headers.stsincludesubdomains=true"
     #  - "traefik.http.middlewares.unifiproxy.headers.stspreload=true"
