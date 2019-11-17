@@ -162,9 +162,8 @@ sudo apt-get update -y
 sudo apt-get install docker-ce -y --no-install-recommends
 ```
 
-The official Docker CE will try to install aufs-dkms as a dependency however it will fail. The default is to now use overlayfs2. 
+The official Docker CE will try to install aufs-dkms as a dependency however it will fail. The default is to now use overlayfs2. This requires no changes on your part though. 
 Reference: https://github.com/raspberrypi/linux/issues/3021#issuecomment-508704040
-
 
 ```
 sudo apt remove aufs-dkms -y
@@ -179,3 +178,11 @@ sudo apt install python3-pip -y
 
 sudo pip3 install docker-compose
 ```
+
+#### Setup Files
+
+```
+sudo mkdir /srv/containers
+sudo chown $USER:docker /srv/containers
+```
+

@@ -1,5 +1,10 @@
 #Extras
 .DS_Store
+.key
+.crt
+.pem
+.private
+data/
 
 # Logs
 logs
