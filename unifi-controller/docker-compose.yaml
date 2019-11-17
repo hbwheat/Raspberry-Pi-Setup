@@ -19,12 +19,10 @@ services:
       - 8080:8080       # device communication
       #- 8081:8081
       #- 8443:8443       # gui in browser for testing
-      #- 8843:8843
+      - 8843:8843
       #- 8880:8880
       - 6789:6789       # speed test
     restart: always
-    expose:
-      - 8443
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.unifi.rule=Host(`${URL0_SAN}`)"
