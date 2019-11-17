@@ -37,7 +37,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.pihole.rule=Host(`${URL0_SAN}`)"
-      - "treafik.http.routers.pihole.entrypoints=websecure"
+      - "traefik.http.routers.pihole.entrypoints=websecure"
       - "traefik.http.routers.pihole.tls=true"
       - "traefik.http.routers.pihole.tls.certresolver=mydnschallenge"
       #- "traefik.http.routers.pihole.service=pihole@docker"
