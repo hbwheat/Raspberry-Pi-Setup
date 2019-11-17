@@ -27,12 +27,12 @@ services:
      - 8443
     labels:
       - "traefik.http.routers.unifi.rule=Host(`${URL0_SAN}`)"
-      - "traefik.http.routers.unifi.service=unifi@docker"
+      #- "traefik.http.routers.unifi.service=unifi@docker"
       - "traefik.http.routers.unifi.entrypoints=websecure"
       - "traefik.http.routers.unifi.tls=true"
       - "traefik.http.routers.unifi.tls.certresolver=mydnschallenge"
-      - "traefik.http.services.unifi.loadbalancer.server.scheme=https"
-      - "traefik.http.services.unifi.loadbalancer.server.port=8443"
+      #- "traefik.http.services.unifi.loadbalancer.server.scheme=https"
+      #- "traefik.http.services.unifi.loadbalancer.server.port=8443"
 
 networks:
     traefiknet:
