@@ -62,3 +62,8 @@ You can also use the debugging switch to verify your switches work as intended.
 Remember to start the service once you've tested: ```sudo service isc-dhcp-relay restart```
 
 Man page for the DHCP relay: https://manpages.debian.org/testing/isc-dhcp-relay/dhcrelay.8.en.html
+
+Alternative https://discourse.pi-hole.net/t/dhcp-with-docker-compose-and-bridge-networking/17038 I like the idea of everything being in containers. I'll need to look at this more. 
+
+Trying with a seperate container. 
+Need to use ```sudo docker-compose build```

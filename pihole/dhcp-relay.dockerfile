@@ -1,6 +1,6 @@
 FROM arm32v7/debian
-RUN apt-get update -y && apt-get upgrade -y && \
-apt -get install isc-dhcp-relay && \
+RUN  DEBIAN_FRONTEND=noninteractive apt-get update -y && apt-get upgrade -y && \
+ DEBIAN_FRONTEND=noninteractive apt-get install -y isc-dhcp-relay && \
 apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ARG INTERFACE_UPSTREAM
