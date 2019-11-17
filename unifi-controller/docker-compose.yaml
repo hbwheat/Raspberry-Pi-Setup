@@ -23,6 +23,8 @@ services:
       #- 8880:8880
       - 6789:6789       # speed test
     restart: always
+    expose:
+     - 8443
     labels:
       - "traefik.http.routers.unifi.rule=Host(`${URL0_SAN}`)"
       - "traefik.http.routers.unifi.service=unifi@docker"
