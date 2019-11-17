@@ -42,7 +42,7 @@ services:
       #- "--serverstransport.rootcas=/etc/traefik/certs/rootcas.crt"
       - "--certificatesresolvers.mydnschallenge.acme.dnschallenge=true"
       - "--certificatesresolvers.mydnschallenge.acme.dnschallenge.provider=cloudflare"
-      - "--certificatesresolvers.mydnschallenge.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory" #for testing the challenge and API keys
+      #- "--certificatesresolvers.mydnschallenge.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory" #for testing the challenge and API keys
       - "--certificatesresolvers.mydnschallenge.acme.email=${MYDNSCHALLENGE_ACME_EMAIL}"
       - "--certificatesResolvers.mydnschallenge.acme.dnsChallenge.delayBeforeCheck=5"
 
