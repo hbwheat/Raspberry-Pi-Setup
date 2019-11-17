@@ -25,6 +25,8 @@ https://qiita.com/bmj0114/items/9c24d863bcab1a634503
 ## DHCP
 Set a hostname for your container in the docker-compose file. We'll need this for the relay to have a server to search for.
 
+Also, we'll comment out the dhcp port in the compose file. The DHCP relay will forward our traffic back and forth out of the container.
+
 Setting up a DHCP server within a container has a simple challenge. DHCP packets don't traverse over subnets. The way docker handles bridging of networks, if you wish to have a container not be on the host network you'll need to configure your server with a dhcp relay.
 
 The relay will sit on both the docker network bridge for the dhcp server and the client request side.
@@ -46,3 +48,17 @@ Bring up ip routes again and lets see the new networking scheme. The new network
 ip route
 ```
 
+We'll add this interface to the dhcp-relay configuration file. Install the dhcp relay via apt.
+``sudo apt install isc-dhcp-relay -y```
+
+I've added my isc-dhcp-relay file for reference. The options used here will be set in the "options" on in the file.
+
+```sudo service isc-dhcp-relay restart```
+To monitor the logs tail ```tail -f /var/log/syslog``` to verify the deamon is starting properly. 
+
+You can also use the debugging switch to verify your switches work as intended.
+ ```sudo dhcrelay -4 -d -id eth0 -iu br-976c9dfa3dbb pihole```
+
+Remember to start the service once you've tested: ```sudo service isc-dhcp-relay restart```
+
+Man page for the DHCP relay: https://manpages.debian.org/testing/isc-dhcp-relay/dhcrelay.8.en.html
