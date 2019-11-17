@@ -22,7 +22,7 @@ services:
       #- CF_API_KEY=${CF_API_KEY}
       - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}
       - CF_ZONE_API_TOKEN=${CF_ZONE_API_TOKEN}
-      - TRAEFIK_SERVERSTRANSPORT_INSECURESKIPVERIFY: "true"
+      - "TRAEFIK_SERVERSTRANSPORT_INSECURESKIPVERIFY=true"
     command: #these commands replace a separate traefik.yaml config file
       - "--log.level=debug" #logLevel DEBUG, INFO, WARN, ERROR, FATAL, PANIC
       - "--log.filepath=/etc/traefik/traefik.log"
