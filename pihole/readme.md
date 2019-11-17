@@ -71,3 +71,5 @@ Need to use ```sudo docker-compose build```
 Two option now.... 
 1. use server
 2. use container services to forward dhcp requests and replies. 
+
+Add ```dhcp-option=option:dns-server,x.x.x.x```` to the dhcp conf file in the "etc-dnsmasq.d" data directory. 
