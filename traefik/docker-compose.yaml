@@ -51,7 +51,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.api.rule=Host(`${URL0_SAN}`)"
-      - - "traefik.http.routers.api.entrypoints=websecure"
+      - "traefik.http.routers.api.entrypoints=websecure"
       - "traefik.http.routers.api.service=api@internal"
       - "traefik.http.routers.api.tls=true"
       - "traefik.http.routers.api.tls.certresolver=mydnschallenge"
