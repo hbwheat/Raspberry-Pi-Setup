@@ -28,7 +28,7 @@ services:
     cap_add:
       - NET_ADMIN
     restart: always
-    labels:
+    #labels:
     #- "traefik.enable=true"
       #- "traefik.http.routers.pihole.rule=Host(`${URL0_SAN}`) || Host(`${URL_IP}`)"
       #- "treafik.http.routers.pihole.entrypoints=web,websecure"
