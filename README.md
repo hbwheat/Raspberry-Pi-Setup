@@ -184,5 +184,8 @@ sudo pip3 install docker-compose
 ```
 sudo mkdir /srv/containers
 sudo chown $USER:docker /srv/containers
+
+git clone git@github.com:hbwheat/Raspberry-Pi-Setup.git /srv/containers
+
 ```
 
