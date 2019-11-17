@@ -2,6 +2,16 @@ version: "3.3"
 
 # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
 services:
+  dhcp-relay:
+    container_name: dhcp-relay
+    build: 
+      context: .
+      dockerfile: dhcp-relay.dockerfile
+      args:
+        INTERFACE_UPSTREAM: "br-976c9dfa3dbb"
+        INTERFACE_DOWNSTREAM: "eth0"
+        SERVER: "pihole"
+
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
