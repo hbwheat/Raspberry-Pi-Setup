@@ -5,6 +5,8 @@ services:
     image: linuxserver/unifi-controller:arm32v7-latest
     container_name: unifi-controller
     hostname: unifi-controller
+    network:
+      - traefiknet
     environment:
       - PUID=1000
       - PGID=1000
@@ -29,3 +31,7 @@ services:
       - "traefik.http.routers.unifi.tls.certresolver=mydnschallenge"
       - "traefik.http.services.unifi.loadbalancer.server.scheme=https"
       - "traefik.http.services.unifi.loadbalancer.server.port=8443"
+
+networks:
+    traefiknet:
+        external: true
