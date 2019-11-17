@@ -59,7 +59,7 @@ services:
       - "traefik.http.routers.piholeadmin.tls=true"
       - "traefik.http.routers.piholeadmin.tls.certresolver=mydnschallenge"
       - "traefik.http.middlewares.piholeadmin-redirect.redirectregex.regex=^https://${URL1_SAN}*"
-      - "traefik.http.middlewares.piholeadmin-redirect.redirectregex.replacement=https://${URL0_SAN}/admin/"
+      - "traefik.http.middlewares.piholeadmin-redirect.redirectregex.replacement=https://${URL0_SAN}/admin"
       - "traefik.http.routers.piholeadmin.middlewares=piholeadmin-redirect"
       - "traefik.http.services.piholeadmin.loadbalancer.server.scheme=http"
       - "traefik.http.services.piholeadmin.loadbalancer.server.port=80"
