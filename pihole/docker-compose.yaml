@@ -55,7 +55,7 @@ services:
 
 #----------------------------------------------------------------------------------
       #sinkhole for port 443
-      - "traefik.http.routers.pihole443admin.rule=Host(`${URL0_SAN}`)`)"
+      - "traefik.http.routers.pihole443admin.rule=Host(`${URL0_SAN}`)"
       - "traefik.http.routers.pihole443admin.service=pihole443admin@docker"
       - "traefik.http.routers.pihole443admin.entrypoints=websecure"
       - "traefik.http.routers.pihole443admin.tls=true"
