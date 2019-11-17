@@ -5,6 +5,7 @@ services:
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
+    env_file: ./.env
     networks:
       - traefiknet
     ports:
