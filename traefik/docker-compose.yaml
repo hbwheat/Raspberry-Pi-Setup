@@ -11,7 +11,7 @@ services:
       - 80:80
       - 443:443
     volumes:
-      #- ./dynamic-conf.yaml:/etc/traefik/dynamic-conf.yaml
+      - ./dynamic-conf.yaml:/etc/traefik/dynamic-conf.yaml:ro
       - ./data/traefik.log:/etc/traefik/traefik.log
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./data/acme.json:/letsencrypt/acme.json:rw #used by LetsEncrypt for HTTPs
