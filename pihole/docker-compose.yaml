@@ -8,7 +8,6 @@ services:
     env_file: ./.env
     networks:
       - traefiknet
-      - host
     ports:
       - "53:53/tcp" #dns
       - "53:53/udp" #dns
@@ -85,6 +84,4 @@ services:
 
 networks:
     traefiknet:
-        external: true
-    host:
         external: true
