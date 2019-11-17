@@ -36,7 +36,7 @@ services:
       - "traefik.http.routers.unifi.middlewares=unifiproxy"
 
       - "traefik.http.middlewares.unifiproxy.headers.framedeny=true"
-      - "traefik.http.middlewares.middleware09.headers.stsseconds=420000000"
+      - "traefik.http.middlewares.unifiproxy.headers.stsseconds=420000000"
       - "traefik.http.middlewares.unifiproxy.headers.stsincludesubdomains=true"
       - "traefik.http.middlewares.unifiproxy.headers.stspreload=true"
       - "traefik.http.middlewares.unifiproxy.headers.contenttypenosniff=true"
