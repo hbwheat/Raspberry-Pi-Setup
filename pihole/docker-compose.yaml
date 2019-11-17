@@ -6,7 +6,7 @@ services:
     container_name: pihole
     image: pihole/pihole:latest
     env_file: ./.env
-    hostname: pihole
+    hostname: pihole.local
     networks:
       - traefiknet
       - piholedhcp
