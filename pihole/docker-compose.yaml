@@ -16,6 +16,7 @@ services:
       #- "443:443/tcp"
     expose:
      - 80
+     - 443
     environment:
       TZ: 'America/New_York'
       WEBPASSWORD: ${WEBPASSWORD}
