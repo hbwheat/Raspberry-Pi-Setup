@@ -11,6 +11,7 @@ services:
         INTERFACE_UPSTREAM: "br-976c9dfa3dbb"
         INTERFACE_DOWNSTREAM: "eth0"
         SERVER: "pihole"
+    image: local/dhcp-relay-arm32v7:latest
     restart: always
     network_mode: host
     depends_on: 
