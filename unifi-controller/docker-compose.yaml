@@ -18,29 +18,30 @@ services:
       - 10001:10001/udp # port for device discovery
       - 8080:8080       # device communication
       #- 8081:8081
-      - 8443:8443       # gui in browswer for testing
+      - 8443:8443       # gui in browser for testing
       #- 8843:8843
       #- 8880:8880
       - 6789:6789       # speed test
     restart: always
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.unifi.rule=Host(`${URL0_SAN}`) || (Host(`${URL0_SAN}`) && PathPrefix(`/*`))"
+      - "traefik.http.routers.unifi.rule=Host(`${URL0_SAN}`)"
       - "traefik.http.routers.unifi.entrypoints=websecure"
-      - "traefik.http.routers.unifi.service=unifi@docker"
+      #- "traefik.http.routers.unifi.service=unifi@docker"
       - "traefik.http.routers.unifi.tls=true"
       - "traefik.http.routers.unifi.tls.certresolver=mydnschallenge"
-      - "traefik.http.services.unifi.loadbalancer.server.scheme=https"
-      - "traefik.http.services.unifi.loadbalancer.server.port=8443"
-      - "traefik.http.services.unifi.loadbalancer.passhostheader=true"
-      - "traefik.http.routers.unifi.middlewares=unifiproxy"
+     # - "traefik.http.routers.unifi.middlewares=unifiproxy"
+      
+      #- "traefik.http.services.unifi.loadbalancer.server.scheme=https"
+      #- "traefik.http.services.unifi.loadbalancer.server.port=8443"
+      #- "traefik.http.services.unifi.loadbalancer.passhostheader=true"
 
-      - "traefik.http.middlewares.unifiproxy.headers.framedeny=true"
-      - "traefik.http.middlewares.unifiproxy.headers.stsseconds=420000000"
-      - "traefik.http.middlewares.unifiproxy.headers.stsincludesubdomains=true"
-      - "traefik.http.middlewares.unifiproxy.headers.stspreload=true"
-      - "traefik.http.middlewares.unifiproxy.headers.contenttypenosniff=true"
-      - "traefik.http.middlewares.unifiproxy.headers.browserxssfilter=true"
+    #  - "traefik.http.middlewares.unifiproxy.headers.framedeny=true"
+    #  - "traefik.http.middlewares.unifiproxy.headers.stsseconds=420000000"
+    #  - "traefik.http.middlewares.unifiproxy.headers.stsincludesubdomains=true"
+    #  - "traefik.http.middlewares.unifiproxy.headers.stspreload=true"
+    #  - "traefik.http.middlewares.unifiproxy.headers.contenttypenosniff=true"
+    #  - "traefik.http.middlewares.unifiproxy.headers.browserxssfilter=true"
 
 networks:
     traefiknet:
