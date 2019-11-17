@@ -2,7 +2,7 @@ version: "3.3"
 
 services: 
   traefik:
-    image: arm64v8/traefik:v2.0.5
+    image: arm32v7/traefik:v2.0.5
     container_name: traefik
     networks:
       - traefiknet
