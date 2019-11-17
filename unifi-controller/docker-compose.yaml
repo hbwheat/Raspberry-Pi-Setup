@@ -4,19 +4,28 @@ services:
   unifi-controller:
     image: linuxserver/unifi-controller:arm32v7-latest
     container_name: unifi-controller
+    hostname: unifi-controller
     environment:
       - PUID=1000
       - PGID=1000
       - MEM_LIMIT=1024M #optional
     volumes:
-      - /opt/containers/unifi/data:/config
+      - ./data:/config
     ports:
-      - 3478:3478/udp
-      - 10001:10001/udp
-      - 8080:8080
-      - 8081:8081
-      - 8443:8443
-      - 8843:8843
-      - 8880:8880
-      - 6789:6789
+      - 3478:3478/udp   # STUN
+      - 10001:10001/udp # port for device discovery
+      - 8080:8080       # device communication
+      #- 8081:8081
+      #- 8443:8443       # gui in browswer
+      #- 8843:8843
+      #- 8880:8880
+      - 6789:6789       # speed test
     restart: always
+    labels:
+      - "traefik.http.routers.unifi.rule=Host(`${URL0_SAN}`)"
+      - "traefik.http.routers.unifi.service=unifi@docker"
+      - "traefik.http.routers.unifi.entrypoints=websecure"
+      - "traefik.http.routers.unifi.tls=true"
+      - "traefik.http.routers.unifi.tls.certresolver=mydnschallenge"
+      - "traefik.http.services.unifi.loadbalancer.server.scheme=https"
+      - "traefik.http.services.unifi.loadbalancer.server.port=8443"
