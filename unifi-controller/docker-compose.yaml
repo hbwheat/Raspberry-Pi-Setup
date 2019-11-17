@@ -1,7 +1,7 @@
 version: "3.3"
 
 services:
-  unifi-controller:
+  unifi:
     image: linuxserver/unifi-controller:arm32v7-latest
     container_name: unifi-controller
     hostname: unifi
