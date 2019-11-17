@@ -1,0 +1,5 @@
+# ./dyanamic-conf.yaml
+
+## Static configuration
+serversTransport:
+  insecureSkipVerify: true

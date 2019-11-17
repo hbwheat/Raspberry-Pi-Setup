@@ -36,14 +36,29 @@ services:
     restart: always
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.pihole.rule=Host(`${URL0_SAN}`)"
-      - "traefik.http.middlewares.pihole.addprefix.prefix=/admin"
-      - "traefik.http.routers.pihole.entrypoints=websecure"
-      - "traefik.http.routers.pihole.tls=true"
-      - "traefik.http.routers.pihole.tls.certresolver=mydnschallenge"
-      #- "traefik.http.routers.pihole.service=pihole@docker"
-      #- "traefik.http.services.pihole.loadbalancer.server.scheme=http"
-      - "traefik.http.services.pihole.loadbalancer.server.port=80"
+
+      #sinkhole for port 80
+      - "traefik.http.routers.pihole80.rule=Host(`${URL0_SAN}`) || Host(`${HOST_IP}`)"
+      - "traefik.http.routers.pihole80.service=pihole80@docker"
+      - "traefik.http.routers.pihole80.entrypoints=web"
+      - "traefik.http.services.pihole80.loadbalancer.server.port=80"
+#----------------------------------------------------------------------------------
+      #sinkhole for port 443
+      - "traefik.http.routers.pihole443.rule=Host(`${URL0_SAN}`) || Host(`${HOST_IP}`)"
+      - "traefik.http.routers.pihole443.service=pihole443@docker"
+      - "traefik.http.routers.pihole443.entrypoints=websecure"
+      - "traefik.http.services.pihole443.loadbalancer.server.port=443"
+#----------------------------------------------------------------------------------
+      #admin access
+      - "traefik.http.routers.piholeadmin.rule=Host(`${URL1_SAN}`)"
+      - "traefik.http.middlewares.piholeadmin.addprefix.prefix=/admin"
+      - "traefik.http.routers.piholeadmin.entrypoints=websecure"
+      - "traefik.http.routers.piholeadmin.service=piholeadmin@docker"
+      - "traefik.http.routers.piholeadmin.tls=true"
+      - "traefik.http.routers.piholeadmin.tls.certresolver=mydnschallenge"
+      - "traefik.http.services.piholeadmin.loadbalancer.server.scheme=https"
+      - "traefik.http.services.piholeadmin.loadbalancer.server.port=443"
+
 networks:
     traefiknet:
         external: true
