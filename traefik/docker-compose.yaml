@@ -28,6 +28,7 @@ services:
       - "--log.format=json"
       - "--api.insecure=true"
       - "--api.dashboard=true"
+      - "--serverstransport.insecureskipverify=true"
       - "--metrics.prometheus.entryPoint=metrics"
       - "--metrics.prometheus.addentrypointslabels"
       - "--metrics.prometheus.addserviceslabels=true"
@@ -46,7 +47,7 @@ services:
       - "--certificatesresolvers.mydnschallenge.acme.email=${MYDNSCHALLENGE_ACME_EMAIL}"
       - "--certificatesResolvers.mydnschallenge.acme.dnsChallenge.delayBeforeCheck=5"
       - "--certificatesresolvers.mydnschallenge.acme.storage=/letsencrypt/acme.json"
-      #- "--serverstransport.insecureskipverify=true"
+
       - "--serverstransport.rootcas=/etc/traefik/certs/CAs.crt"
     labels:
       - "traefik.enable=true"
