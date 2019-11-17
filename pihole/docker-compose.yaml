@@ -36,7 +36,7 @@ services:
     restart: always
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.pihole.rule=Host(`${URL0_SAN}`)"
+      - "traefik.http.routers.pihole.rule=Host(`${URL0_SAN}/admin`)"
       - "traefik.http.routers.pihole.entrypoints=websecure"
       - "traefik.http.routers.pihole.tls=true"
       - "traefik.http.routers.pihole.tls.certresolver=mydnschallenge"
