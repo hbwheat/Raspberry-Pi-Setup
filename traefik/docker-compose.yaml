@@ -13,7 +13,7 @@ services:
       #- ./dynamic-conf.yaml:/etc/traefik/dynamic-conf.yaml
       - ./data/traefik.log:/etc/traefik/traefik.log
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./data/acme.json:/letsencrypt/acme.json:Z #used by LetsEncrypt for HTTPs
+      - ./data/acme.json:/letsencrypt/acme.json:rw #used by LetsEncrypt for HTTPs
       #- ./certs:/srv/certs:ro #for self signed certs and CA
     environment:
       #- CF_API_EMAIL=${CF_API_EMAIL}
