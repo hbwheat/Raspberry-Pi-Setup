@@ -18,7 +18,7 @@ services:
       - 10001:10001/udp # port for device discovery
       - 8080:8080       # device communication
       #- 8081:8081
-      #- 8443:8443       # gui in browser for testing
+      - 8443:8443       # gui in browser for testing
       #- 8843:8843
       #- 8880:8880
       - 6789:6789       # speed test
@@ -44,7 +44,7 @@ services:
       - "traefik.http.middlewares.unifiproxy.headers.framedeny=true"
       - "traefik.http.middlewares.unifiproxy.headers.sslredirect=true"
       - "traefik.http.middlewares.unifiproxy.headers.browserxssfilter=true"
-      - "traefik.http.middlewares.unifiproxy.headers.sslhost=${URL0_SAN}"
+      - "traefik.http.middlewares.unifiproxy.headers.sslhost=${DOMAIN}"
       - "traefik.http.middlewares.unifiproxy.headers.stsseconds=315360000"
       - "traefik.http.middlewares.unifiproxy.headers.stsincludesubdomains=true"
       - "traefik.http.middlewares.unifiproxy.headers.stspreload=true"
