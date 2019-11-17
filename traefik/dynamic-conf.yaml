@@ -5,4 +5,4 @@ serversTransport:
   insecureSkipVerify: true
 
   rootCAs:
-    - unifi.crt
+    - /etc/traefik/certs/unifi.crt
