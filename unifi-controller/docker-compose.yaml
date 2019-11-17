@@ -32,6 +32,8 @@ services:
       - "traefik.http.routers.unifi.tls.certresolver=mydnschallenge"
       - "traefik.http.services.unifi.loadbalancer.server.scheme=https"
       - "traefik.http.services.unifi.loadbalancer.server.port=8443"
+      - "traefik.http.services.unifi.loadbalancer.passhostheader=true"
+
 
 networks:
     traefiknet:
