@@ -2,6 +2,12 @@ version: "3.3"
 
 # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
 services:
+  dhcp-relay:
+    container_name: dhcp-relay
+    build:
+        context: .
+    image: local/dhcp-relay
+
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
@@ -11,7 +17,11 @@ services:
     ports:
       - "53:53/tcp" #dns
       - "53:53/udp" #dns
-      - "67:67/udp" #dhcp server 
+      - target: 67
+        published: 67
+        protocol: udp
+        mode: host
+      #- "67:67/udp" #dhcp server 
       #- "80:80/tcp"
       #- "443:443/tcp"
     expose:
