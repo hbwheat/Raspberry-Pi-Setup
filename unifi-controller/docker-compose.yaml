@@ -33,7 +33,14 @@ services:
       - "traefik.http.services.unifi.loadbalancer.server.scheme=https"
       - "traefik.http.services.unifi.loadbalancer.server.port=8443"
       - "traefik.http.services.unifi.loadbalancer.passhostheader=true"
+      - "traefik.http.routers.unifi.middlewares=unifiproxy"
 
+      - "traefik.http.middlewares.unifiproxy.headers.framedeny=true"
+      - "traefik.http.middlewares.middleware09.headers.stsseconds=42"
+      - "traefik.http.middlewares.unifiproxy.headers.stsincludesubdomains=true"
+      - "traefik.http.middlewares.unifiproxy.headers.stspreload=true"
+      - "traefik.http.middlewares.unifiproxy.headers.contenttypenosniff=true"
+      - "traefik.http.middlewares.unifiproxy.headers.browserxssfilter=true"
 
 networks:
     traefiknet:
