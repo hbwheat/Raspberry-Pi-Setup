@@ -15,7 +15,7 @@ You'll see that the commands section of the compose.yaml sets quite a few defaul
 
  In the future for testing or changes, rather than taking down the proxy server we can adjust configurations in the dynamic-config.yaml file as traefik is configured to watch this for any updates.
 
- The directory structure is as follows: 
+ The directory structure is as follows: * are items you'll need to create. 
  ```
  --| traefik
  ----|docker-compose.yaml
