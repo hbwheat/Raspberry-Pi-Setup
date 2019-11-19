@@ -12,14 +12,21 @@ The etc-pihole folder will hold persistent data. We'll add a new config to the d
 
 Create a single text file with a line telling the pihole dns to send all dns traffic based on teh wild card *.hbwheat.dev towards the ip of the server. I'll also add a .list file for reference in the persistent data folder for future use. This will allow me to define IPs as necessary and be served by the pihole dns server.
 
+DNSMASQ will look to this directory for any configuration files. 
+
+file name: 02-pihole.conf added the following:
 ```
 addn-hosts=/etc/pihole/01.locallan.list
 address=/hbwheat.dev/192.168.1.12
 ```
 
 ## Local DNS Settings
-Adding 2 files is necessary along with one line for wildcards in the .conf file.
+You can define custom dns entries using a .list files and configuring DNSMASQ to look at this list for DNS requests. 
+Make sure you put the .list file in "/srv/containers/pihole/etc-pihole/". 
 
+Add any local dns records to the "01.locallan.list". 
+
+Reference to add dns entries: 
 https://qiita.com/bmj0114/items/9c24d863bcab1a634503
 
 ## DHCP-Relay and DHCP
