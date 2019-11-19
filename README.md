@@ -196,33 +196,32 @@ sudo docker network create traefiknet
 
 ## Overall File Structure
 You'll need to create the data folder, .env, and any user made folders in data. 
-
+You'll need to create items with * next to them. 
  ```
  --| containers
  ----| traefik
  ------|docker-compose.yaml
  ------| dynamic-config.yaml
  ------| readme.md
- ------| .env
- ------| data
- --------| acme.json (this file must be locked down to 600 using chmod)
- --------| traefik.log
+ ------| .env *
+ ------| data *
+ --------| acme.json (this file must be locked down to 600 using chmod) *
+ --------| traefik.log *
  ----| pihole
   ------| docker-compose.yaml
   ------| dhcp-relay.dockerfile
-  ------| .env
-  ------| data
+  ------| .env *
+  ------| data *
  ---------| etc-dnsmasq.d
  -----------| (pihole will create more files here)
- -----------| 02-pihole.conf
+ -----------| 02-pihole.conf *
  --------| etc-pihole
  -----------| (pihole will create more files here)
- -----------| 01.locallan.list
+ -----------| 01.locallan.list *
  ----| unifi-controller
   ------| docker-compose.yaml
-  ------| .env
-  ------| data
-
+  ------| .env *
+  ------| data *
 ```
 
 
