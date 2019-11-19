@@ -22,10 +22,19 @@ Adding 2 files is necessary along with one line for wildcards in the .conf file.
 
 https://qiita.com/bmj0114/items/9c24d863bcab1a634503
 
-## DHCP
-Set a hostname for your container in the docker-compose file. We'll need this for the relay to have a server to search for.
+## DHCP-Relay and DHCP
+### Important part here: The pihole DHCP server will hand out the IP of the container. Override it with the IP of the raspberry pi.
 
-Also, we'll comment out the dhcp port in the compose file. The DHCP relay will forward our traffic back and forth out of the container.
+Add the following line to your DHCP config in the "etc-dnsmaq.d" data folder:
+```dhcp-option=option:dns-server,x.x.x.x```` 
+
+You'll need to turn DHCP on in the pihole first for this file to exist. Either open the file and add the line or use a one liner. 
+
+```echo "dhcp-option=option:dns-server,192.168.1.2" | sudo tee ./etc-dnsmasq.d/02-pihole-dhcp.conf```
+
+Next set a hostname for your container in the docker-compose file. We'll need this for the relay to have a server to search for.
+
+Also, we'll comment out the dhcp port in the compose file. The DHCP-relay will forward our traffic back and forth out of the container.
 
 Setting up a DHCP server within a container has a simple challenge. DHCP packets don't traverse over subnets. The way docker handles bridging of networks, if you wish to have a container not be on the host network you'll need to configure your server with a dhcp relay.
 
@@ -47,8 +56,14 @@ Bring up ip routes again and lets see the new networking scheme. The new network
 ```
 ip route
 ```
+I'm using Method 2 .....after going with Method 1 first, but I like it everything being containerized. Minimal server setup is my preference. 
 
-We'll add this interface to the dhcp-relay configuration file. Install the dhcp relay via apt.
+### Methood 1
+#### Use a dhcp-relay on the raspberry pi to listen on an interface and forward requets to the container network. 
+
+We'll add the interface we found above to the dhcp-relay configuration file.
+
+Install the dhcp relay via apt.
 ``sudo apt install isc-dhcp-relay -y```
 
 I've added my isc-dhcp-relay file for reference. The options used here will be set in the "options" on in the file.
@@ -56,20 +71,32 @@ I've added my isc-dhcp-relay file for reference. The options used here will be s
 ```sudo service isc-dhcp-relay restart```
 To monitor the logs tail ```tail -f /var/log/syslog``` to verify the deamon is starting properly. 
 
-You can also use the debugging switch to verify your switches work as intended.
+You can also use the debugging switch to verify your switches work as intended.Then write these swtiches to the OPTIONS section in the configuration files at ```/etc/default/isc-dhcp-relay```. 
+
  ```sudo dhcrelay -4 -d -id eth0 -iu br-976c9dfa3dbb pihole```
 
-Remember to start the service once you've tested: ```sudo service isc-dhcp-relay restart```
+Remember to start the service once you've tested with the above command.
+```sudo service isc-dhcp-relay restart```
 
 Man page for the DHCP relay: https://manpages.debian.org/testing/isc-dhcp-relay/dhcrelay.8.en.html
 
-Alternative https://discourse.pi-hole.net/t/dhcp-with-docker-compose-and-bridge-networking/17038 I like the idea of everything being in containers. I'll need to look at this more. 
+## Method 2
+### Use a seperate container and make it the relay. 
+The second method is to define a second container, give this one network mode host, and stradle the necessary interfaces. 
 
-Trying with a seperate container. 
-Need to use ```sudo docker-compose build```
+This is a good reference used https://discourse.pi-hole.net/t/dhcp-with-docker-compose-and-bridge-networking/17038 
+I like the idea of everything being in containers.
 
-Two option now.... 
-1. use server
-2. use container services to forward dhcp requests and replies. 
+Need to use ```sudo docker-compose build``` for some reason. This needed to be run as sudo. It'll use the tag in the compose file to label the image. 
 
-Add ```dhcp-option=option:dns-server,x.x.x.x```` to the dhcp conf file in the "etc-dnsmasq.d" data directory. 
+The docker-compose file lists the build image tag and necessary information for the container. Most importantly this container will have the network mode host option. Network mode host gives this container access to the host networking stack. It'll be able to forward UDP packets on the interfaces we specify. 
+
+Give the dockerfile some build arguments: 
+```
+ args:
+   INTERFACE_UPSTREAM: "br-976c9dfa3dbb"
+   INTERFACE_DOWNSTREAM: "eth0"
+   SERVER: "pihole"
+ ```
+ The upstream interface is the one where the DHCP server will be, and the downstream is where requests will originate. Last, the server is the hostname we defined in the compose file. This dockerfile could be refactored to manually add more interfaces if needed.
+ 
