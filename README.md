@@ -189,7 +189,7 @@ git clone git@github.com:hbwheat/Raspberry-Pi-Setup.git /srv/containers
 
 ```
 
-#### Setup for Traefik
+#### Setup Network for Traefik
 ```
 sudo docker network create traefiknet
 ```
