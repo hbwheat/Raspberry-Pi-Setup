@@ -2,6 +2,10 @@
 
 Using docker-compose to organize all of the information required to setup treafik. The workflow I have now is to push changes to Github then pull them down on the docker server. 
 
+## HTTPS + AMCEv2 + LetsEncrypt
+I'm using traefik's built in cert ability and DNS-01 challenage with Cloudflare.
+
+Reference: https://docs.traefik.io/user-guides/docker-compose/acme-dns/
 
 ## Files
 
@@ -17,10 +21,25 @@ You'll see that the commands section of the compose.yaml sets quite a few defaul
  ----|docker-compose.yaml
  ----| dynamic-config.yaml
  ----| readme.md
- ----| .env
- ----| data
- ------| acme.json (this file must be locked down to 600 using chmod)
- ------| traefik.log
+ ----| .env *
+ ----| data *
+ ------| acme.json (this file must be locked down to 600 using chmod) *
+ ------| traefik.log *
+```
+
+## .env file 
+
+My .env file. This is a file I excluded from github so you'll have to create manually. 
+
+``` 
+CF_API_EMAIL=
+CF_API_KEY=
+CF_DNS_API_TOKEN=
+CF_ZONE_API_TOKEN=
+CF_API_EMAIL=
+MYDNSCHALLENGE_ACME_EMAIL=
+URL0_SAN=
+URL_IP=
 ```
 
  ## Providers
