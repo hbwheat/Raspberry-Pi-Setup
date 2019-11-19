@@ -194,4 +194,35 @@ git clone git@github.com:hbwheat/Raspberry-Pi-Setup.git /srv/containers
 sudo docker network create traefiknet
 ```
 
+## Overall File Structure
+You'll need to create the data folder, .env, and any user made folders in data. 
+
+ ```
+ --| containers
+ ----| traefik
+ ------|docker-compose.yaml
+ ------| dynamic-config.yaml
+ ------| readme.md
+ ------| .env
+ ------| data
+ --------| acme.json (this file must be locked down to 600 using chmod)
+ --------| traefik.log
+ ----| pihole
+  ------| docker-compose.yaml
+  ------| dhcp-relay.dockerfile
+  ------| .env
+  ------| data
+ ---------| etc-dnsmasq.d
+ -----------| (pihole will create more files here)
+ -----------| 02-pihole.conf
+ --------| etc-pihole
+ -----------| (pihole will create more files here)
+ -----------| 01.locallan.list
+ ----| unifi-controller
+  ------| docker-compose.yaml
+  ------| .env
+  ------| data
+
+```
+
 
