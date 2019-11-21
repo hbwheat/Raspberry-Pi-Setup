@@ -5,6 +5,7 @@
 .pem
 .private
 data/
+.env
 
 # Logs
 logs
