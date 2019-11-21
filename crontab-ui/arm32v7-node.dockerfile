@@ -17,6 +17,7 @@ RUN npm install -g crontab-ui && \
 npm install -g pm2
 
 ENV PORT 8000
+ENV HOST 0.0.0.0
 
 EXPOSE $PORT
 
