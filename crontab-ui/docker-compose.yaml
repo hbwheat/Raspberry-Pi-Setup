@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+  crontab-ui:
+    container_name: crontab-ui
+    build: 
+      context: .
+      dockerfile: arm32v7-node.dockerfile
+    image: local/arm32v7-crontab-ui:latest
+    networks:
+      - traefiknet
+    volumes:
+      - ./data/scripts:/home/node/scripts:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cron.rule=Host(`${URL0_SAN}`)"
+      - "traefik.http.routers.cron.entrypoints=websecure"
+      - "traefik.http.routers.cron.tls=true"
+      - "traefik.http.routers.cron.tls.certresolver=mydnschallenge"
+      - "traefik.http.middlewares.cronauth.basicauth.users=${CRON_LOGIN}"
+      - "traefik.http.routers.cron.middlewares=cronauth"
+
+networks:
+  traefiknet:
+      external: true
