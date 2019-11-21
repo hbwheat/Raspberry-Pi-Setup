@@ -6,7 +6,11 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y wget curl cron  && \
 apt-get clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /home/node
+
 USER node
+
+ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
+ENV PATH=$PATH:/home/node/.npm-global/bin
 
 RUN npm install -g crontab-ui && \
 npm install -g pm2
