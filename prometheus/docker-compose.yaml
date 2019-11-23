@@ -1,0 +1,51 @@
+version: "3.3"
+
+services: 
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:v2.13.1
+    restart: always
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yaml" #set config file on startup
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.enable-lifecycle" # curl -kX POST http://localhost:9090/-/reload to reload config file
+                                 # curl -kX POST https://prom.tst-dock01.ad.systematicinc.com/-/reload
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yaml
+      #- prometheus-data:/etc/prometheus/ #configs dir
+      #- prometheus-data:/var/lib/prometheus #db dir
+    depends_on:
+      - cadvisor
+    networks:
+      - traefiknet
+    expose:
+      - 9090
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prom.rule=Host(`$URL0_SAN`)"
+      - "traefik.http.routers.prom.entrypoints=websecure"
+      - "traefik.http.routers.prom.tls=true"
+
+  cadvisor: # docker host metrics
+    image: docker.io/google/cadvisor:latest
+    restart: always
+    container_name: cadvisor
+    privileged: true
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    expose:
+      - 8080
+    networks:
+      - traefiknet
+    labels:
+      - "traefik.enable=false"
+      - "traefik.http.routers.cadvisor.rule=Host(`URL1_SAN`)"
+      - "traefik.http.routers.cadvisor.entrypoints=websecure"
+      - "traefik.http.routers.cadvisor.tls=true"
+
+networks:
+    traefiknet:
+        external: true
