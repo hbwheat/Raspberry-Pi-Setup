@@ -5,6 +5,8 @@ services:
     image: arm32v6/vault
     container_name: vault
     hostname: vault
+    command:
+      - "server"
     networks:
       - traefiknet
     volumes:
