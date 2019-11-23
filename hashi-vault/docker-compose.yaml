@@ -1,0 +1,27 @@
+version: "3.3"
+
+services:
+  vault:
+    image:
+    container_name: arm32v6/vault
+    hostname: vault
+    networks:
+      - traefiknet
+    volumes:
+      - ./default.json:/vault/config/default.json
+      - ./data:/vault/logs
+      - ./data:/vault/files
+    cap_add:
+      - IPC_LOCK
+    environment:
+      - 
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.vault.rule=Host(`${URL0_SAN}`)"
+      - "traefik.http.routers.vault.entrypoints=websecure"
+      - "traefik.http.routers.vault.tls=true"
+      - "traefik.http.routers.vault.tls.certresolver=mydnschallenge"
+
+networks:
+  traefiknet:
+    external: true
