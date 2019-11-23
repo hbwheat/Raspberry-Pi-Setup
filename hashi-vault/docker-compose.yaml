@@ -2,8 +2,8 @@ version: "3.3"
 
 services:
   vault:
-    image:
-    container_name: arm32v6/vault
+    image: arm32v6/vault
+    container_name: vault
     hostname: vault
     networks:
       - traefiknet
