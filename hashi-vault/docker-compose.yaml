@@ -13,8 +13,6 @@ services:
       - ./data:/vault/files
     cap_add:
       - IPC_LOCK
-    environment:
-      - 
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.vault.rule=Host(`${URL0_SAN}`)"
