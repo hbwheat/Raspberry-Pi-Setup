@@ -8,9 +8,9 @@ services:
     networks:
       - traefiknet
     volumes:
-      - ./default.json:/vault/config/default.json
-      - ./data:/vault/logs
-      - ./data:/vault/files
+      - ./default.json:/vault/config/default.json:ro
+      - ./data/logs:/vault/logs:rw
+      - ./data/files:/vault/files:rw
     cap_add:
       - IPC_LOCK
     labels:
