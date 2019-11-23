@@ -28,3 +28,9 @@ scrape_configs:
     static_configs:
       - targets:
         - traefik:8082
+
+  - job_name: 'vault'
+    scrape_interval: 5s
+    static_configs:
+      - targets:
+        - vault:8082
