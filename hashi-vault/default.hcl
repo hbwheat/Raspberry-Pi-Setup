@@ -1,5 +1,5 @@
 storage "file" {
-  path = "/vault/files"
+  path = "/vault/file"
 }
 
 ui = true
