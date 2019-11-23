@@ -5,7 +5,7 @@
 "tls_disable" : 1
 }
 }],
-"max_lease_ttl": "168h",
-"default_lease_ttl": "720h",
+"max_lease_ttl": "720h",
+"default_lease_ttl": "168h",
 "ui":true
 }
