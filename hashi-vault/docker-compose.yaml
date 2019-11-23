@@ -8,7 +8,7 @@ services:
     networks:
       - traefiknet
     volumes:
-      - ./default.json:/vault/config/default.json:ro
+      - ./default.hcl:/vault/config/default.hcl:ro
       - ./data/logs:/vault/logs:rw
       - ./data/files:/vault/files:rw
     cap_add:
