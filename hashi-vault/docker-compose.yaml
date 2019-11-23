@@ -6,7 +6,7 @@ services:
     container_name: vault
     hostname: vault
     command:
-      - "server -log-level=info"
+      - "server"
     networks:
       - traefiknet
     expose:
@@ -17,6 +17,7 @@ services:
       - ./data/files:/vault/files:rw
     environment:
       VAULT_API_ADDR: https://${URL0_SAN}
+      LOG_LEVEL: ERROR
     cap_add:
       - IPC_LOCK
     labels:
