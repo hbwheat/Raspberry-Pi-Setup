@@ -14,7 +14,7 @@ services:
     volumes:
       - ./default.hcl:/vault/config/default.hcl:ro
       - ./data/logs:/vault/logs:rw
-      - ./data/files:/vault/files:rw
+      - ./data/file:/vault/file:rw
     environment:
       VAULT_API_ADDR: https://${URL0_SAN}
       LOG_LEVEL: ERROR
