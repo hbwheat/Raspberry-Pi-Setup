@@ -19,7 +19,7 @@ services:
     cap_add:
       - NET_ADMIN
     dns:
-      - 192.168.1.12
+      - pihole.local
 
   pihole:
     container_name: pihole
