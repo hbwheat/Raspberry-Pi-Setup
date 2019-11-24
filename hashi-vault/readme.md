@@ -63,6 +63,7 @@ Tokens are the initial and most basic form of authentication. Use the cli to cre
 
 ```
 vault secrets enable -path=kv cloudflare
-
-
 ```
+
+For userpass authentication add the name of the policy inside of the policy "Generated Token's Policies
+" section. This will all the logged in user to have access to that acl.
