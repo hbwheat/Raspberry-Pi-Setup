@@ -19,9 +19,9 @@ services:
     cap_add:
       - NET_ADMIN
     dns:
-      - pihole.local
+      - pihole.local #tell container to look at pihole container for dns
     dns_search:
-      - .local
+      - .local #search locally for .local domains not the internet
 
   pihole:
     container_name: pihole
