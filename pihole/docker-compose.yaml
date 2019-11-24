@@ -20,6 +20,8 @@ services:
       - NET_ADMIN
     dns:
       - pihole.local
+    dns_search:
+      - .local
 
   pihole:
     container_name: pihole
