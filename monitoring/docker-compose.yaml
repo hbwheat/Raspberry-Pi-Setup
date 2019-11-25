@@ -66,7 +66,7 @@ services:
       #- ./data/grafana.db:/var/lib/grafana/grafana.db:rw
       - ./data/grafana:/var/lib/grafana:rw
     labels:
-      - "traefik.enable=false"
+      - "traefik.enable=true"
       - "traefik.http.routers.grafana.rule=Host(`${URL2_SAN}`)"
       - "traefik.http.routers.grafana.entrypoints=websecure"
       - "traefik.http.routers.grafana.tls=true"
