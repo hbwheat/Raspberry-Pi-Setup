@@ -43,7 +43,7 @@ services:
     restart: unless-stopped
 
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:6.3.7
     networks:
       - traefiknet
       - monitor
