@@ -24,6 +24,7 @@ services:
       - "traefik.http.routers.prom.rule=Host(`${URL0_SAN}`)"
       - "traefik.http.routers.prom.entrypoints=websecure"
       - "traefik.http.routers.prom.tls=true"
+      - "traefik.http.routers.prom.tls.certresolver=mydnschallenge"
 
   nodeexporter:
     image: prom/node-exporter
@@ -69,6 +70,8 @@ services:
       - "traefik.http.routers.grafana.rule=Host(`${URL2_SAN}`)"
       - "traefik.http.routers.grafana.entrypoints=websecure"
       - "traefik.http.routers.grafana.tls=true"
+      - "traefik.http.routers.grafana.tls.certresolver=mydnschallenge"
+
 
 networks:
     traefiknet:
