@@ -63,7 +63,7 @@ services:
     user: "1000"
     volumes:
       #- ./data/grafana.db:/var/lib/grafana/grafana.db:rw
-      - ./data/grafana/:var/lib/grafana:rw
+      - ./data/grafana/:/var/lib/grafana:rw
     labels:
       - "traefik.enable=false"
       - "traefik.http.routers.grafana.rule=Host(`URL2_SAN`)"
