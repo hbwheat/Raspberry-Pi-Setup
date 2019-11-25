@@ -1,3 +1,8 @@
 # ./dyanamic-conf.yaml
 
-
+http:
+  middlewares:
+    enforce-https:
+      redirectScheme:
+        scheme: https
+        permanent: true

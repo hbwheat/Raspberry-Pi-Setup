@@ -72,7 +72,9 @@ services:
       - "traefik.http.routers.grafana.entrypoints=websecure"
       - "traefik.http.routers.grafana.tls=true"
       - "traefik.http.routers.grafana.tls.certresolver=mydnschallenge"
-
+      - "traefik.http.routers.grafanahttp.rule=Host(`${URL2_SAN}`)"
+      - "traefik.http.routers.grafanahttp.entrypoints=web"
+      - "traefik.http.routers.grafanahttp.middlewares=enforce-https@file"
 
 networks:
     traefiknet:
