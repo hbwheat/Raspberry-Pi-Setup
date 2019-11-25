@@ -51,6 +51,8 @@ services:
     restart: always
     hostname: grafana
     container_name: grafana
+    dns:
+      - 192.168.1.12
     environment:
      - GF_INSTALL_PLUGINS=grafana-azure-monitor-datasource
      - GF_SERVER_ROOT_URL=${GF_ROOT}
