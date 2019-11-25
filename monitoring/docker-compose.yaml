@@ -51,6 +51,9 @@ services:
     restart: always
     hostname: ${URL2_SAN}
     container_name: grafana
+    dns:
+      - 192.168.1.12
+      - pihole.local
     environment:
      - GF_INSTALL_PLUGINS=grafana-azure-monitor-datasource
      - GF_SERVER_ROOT_URL=${GF_ROOT}
