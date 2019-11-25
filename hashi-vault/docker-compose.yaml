@@ -9,6 +9,7 @@ services:
       - "server"
     networks:
       - traefiknet
+      - monitor
     expose:
       - 8200
     volumes:
@@ -29,4 +30,6 @@ services:
 
 networks:
   traefiknet:
+    external: true
+  monitor:
     external: true
