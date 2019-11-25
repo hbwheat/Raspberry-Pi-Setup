@@ -77,4 +77,4 @@ networks:
     traefiknet:
       external: true
     monitor:
-      internal: true
+      external: true

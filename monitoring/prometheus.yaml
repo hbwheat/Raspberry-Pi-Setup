@@ -33,4 +33,4 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
       - targets:
-        - vault:8082
+        - vault.:8082
