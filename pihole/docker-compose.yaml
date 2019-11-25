@@ -10,7 +10,7 @@ services:
       args:
         INTERFACE_UPSTREAM: "br-976c9dfa3dbb"
         INTERFACE_DOWNSTREAM: "eth0"
-        SERVER: "pihole"
+        SERVER: "pihole.local"
     image: local/dhcp-relay-arm32v7:latest
     restart: always
     network_mode: host
@@ -18,6 +18,10 @@ services:
       - pihole
     cap_add:
       - NET_ADMIN
+    dns:
+      - pihole.local #tell container to look at pihole container for dns
+    dns_search:
+      - .local #search locally for .local domains not the internet
 
   pihole:
     container_name: pihole
