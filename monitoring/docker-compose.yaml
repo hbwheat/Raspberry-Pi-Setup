@@ -59,7 +59,7 @@ services:
      - GF_SMTP_FROM_ADDRESS=${SMTP_USER}
      - GF_SMTP_USER=${SMTP_USER}
      - GF_SMTP_PASSWORD=${SMTP_PASSWORD}
-     #- GF_LOG_LEVEL=debug
+     - GF_LOG_LEVEL=debug
     user: "1000"
     volumes:
       #- ./data/grafana.db:/var/lib/grafana/grafana.db:rw
