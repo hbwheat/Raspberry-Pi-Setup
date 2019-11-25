@@ -63,7 +63,9 @@ services:
      #- GF_LOG_LEVEL=debug
     user: "1000"
     dns:
-      - pihole
+      - pihole.local
+    dns_search:
+      - .local
     volumes:
       #- ./data/grafana.db:/var/lib/grafana/grafana.db:rw
       - ./data/grafana:/var/lib/grafana:rw
