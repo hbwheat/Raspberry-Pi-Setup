@@ -3,6 +3,7 @@ version: "3.3"
 services: 
   prometheus:
     container_name: prometheus
+    hostname: prometheus
     image: prom/prometheus:v2.13.1
     restart: always
     command:
@@ -49,12 +50,7 @@ services:
       - traefiknet
       - monitor
     restart: always
-    hostname: ${URL2_SAN}
     container_name: grafana
-    dns:
-      - 192.168.1.12
-      - pihole.local
-      - 1.1.1.1
     environment:
      - GF_INSTALL_PLUGINS=grafana-azure-monitor-datasource
      - GF_SERVER_ROOT_URL=${GF_ROOT}
