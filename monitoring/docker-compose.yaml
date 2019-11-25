@@ -49,6 +49,7 @@ services:
       - traefiknet
       - monitor
     restart: always
+    hostname: ${URL2_SAN}
     container_name: grafana
     environment:
      - GF_INSTALL_PLUGINS=grafana-azure-monitor-datasource
@@ -62,10 +63,6 @@ services:
      - GF_SMTP_PASSWORD=${SMTP_PASSWORD}
      #- GF_LOG_LEVEL=debug
     user: "1000"
-    dns:
-      - pihole.local
-    dns_search:
-      - .local
     volumes:
       #- ./data/grafana.db:/var/lib/grafana/grafana.db:rw
       - ./data/grafana:/var/lib/grafana:rw
