@@ -49,7 +49,7 @@ services:
       - traefiknet
       - monitor
     restart: always
-    hostname: ${URL2_SAN}
+    hostname: grafana
     container_name: grafana
     environment:
      - GF_INSTALL_PLUGINS=grafana-azure-monitor-datasource
