@@ -1,0 +1,80 @@
+version: "3.3"
+
+services: 
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:v2.13.1
+    restart: always
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yaml" #set config file on startup
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.enable-lifecycle" # curl -kX POST http://localhost:9090/-/reload to reload config file
+                                 # curl -kX POST https://${URL0_SAN}.com/-/reload
+    volumes:
+      - ./prometheus.yaml:/etc/prometheus/prometheus.yaml
+      #- prometheus-data:/etc/prometheus/ #configs dir
+      #- prometheus-data:/var/lib/prometheus #db dir
+    networks:
+      - traefiknet
+      - monitor
+    expose:
+      - 9090
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prom.rule=Host(`${URL0_SAN}`)"
+      - "traefik.http.routers.prom.entrypoints=websecure"
+      - "traefik.http.routers.prom.tls=true"
+      - "traefik.http.routers.prom.tls.certresolver=mydnschallenge"
+
+  nodeexporter:
+    image: prom/node-exporter
+    container_name: nodeexporter
+    hostname: nodeexporter
+    networks:
+      - monitor
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc|srv|media)($$|/)'
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:6.5.0-beta1
+    networks:
+      - traefiknet
+      - monitor
+    restart: always
+    container_name: grafana
+    environment:
+     - GF_INSTALL_PLUGINS=grafana-azure-monitor-datasource
+     #- GF_SERVER_ROOT_URL=${URL2_SAN}
+     - GF_SECURITY_ADMIN_PASSWORD=${GF_ADMIN_PASSWORD}
+     - GF_PLUGINS_APP_TLS_SKIP_VERIFY_INSECURE=true
+     - GF_SMTP_ENABLED=true
+     - GF_SMTP_HOST=${SMTP_HOST}
+     - GF_SMTP_FROM_ADDRESS=${SMTP_USER}
+     - GF_SMTP_USER=${SMTP_USER}
+     - GF_SMTP_PASSWORD=${SMTP_PASSWORD}
+     #- GF_LOG_LEVEL=debug
+    user: "1000"
+    volumes:
+      #- ./data/grafana.db:/var/lib/grafana/grafana.db:rw
+      - ./data/grafana:/var/lib/grafana:rw
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.grafana.rule=Host(`${URL2_SAN}`)"
+      - "traefik.http.routers.grafana.entrypoints=websecure"
+      - "traefik.http.routers.grafana.tls=true"
+      - "traefik.http.routers.grafana.tls.certresolver=mydnschallenge"
+
+
+networks:
+    traefiknet:
+      external: true
+    monitor:
+      external: true

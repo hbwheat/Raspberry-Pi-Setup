@@ -6,6 +6,8 @@ I'm using the arm32v6 image from docker hub. The storage provider is local file 
 
 Initial setup i'm doing through the UI, but something like  ```docker exec -it vault bash``` plus cli commands will do the same. Vault's documents have setup done through the cli.
 
+Recommend to run with "server" command option from github link I found. So doing that. 
+=======
 The intial setup for Vault want something like:
 Root login -> admin and provisioner acls from docs -> admin token -> admin login 
 
@@ -40,7 +42,6 @@ path "kv-cloudflare/" {
   capabilities = ["list"]
 }
 ```
-
 ## Setup
 
 >Reference: https://learn.hashicorp.com/vault/identity-access-management/iam-policies
