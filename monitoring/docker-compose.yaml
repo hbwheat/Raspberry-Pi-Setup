@@ -14,8 +14,6 @@ services:
       - ./prometheus.yml:/etc/prometheus/prometheus.yaml
       #- prometheus-data:/etc/prometheus/ #configs dir
       #- prometheus-data:/var/lib/prometheus #db dir
-    depends_on:
-      - cadvisor
     networks:
       - traefiknet
     expose:
@@ -26,26 +24,26 @@ services:
       - "traefik.http.routers.prom.entrypoints=websecure"
       - "traefik.http.routers.prom.tls=true"
 
-  cadvisor: # docker host metrics
-    image: docker.io/google/cadvisor:latest
-    restart: always
-    container_name: cadvisor
-    privileged: true
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:ro
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-    expose:
-      - 8080
-    networks:
-      - traefiknet
-    labels:
-      - "traefik.enable=false"
-      - "traefik.http.routers.cadvisor.rule=Host(`URL1_SAN`)"
-      - "traefik.http.routers.cadvisor.entrypoints=websecure"
-      - "traefik.http.routers.cadvisor.tls=true"
-
+#  cadvisor: # docker host metrics
+#    image: docker.io/google/cadvisor:latest
+#    restart: always
+#    container_name: cadvisor
+#    privileged: true
+#    volumes:
+#      - /:/rootfs:ro
+#      - /var/run:/var/run:ro
+#      - /sys:/sys:ro
+#      - /var/lib/docker/:/var/lib/docker:ro
+#    expose:
+#      - 8080
+#    networks:
+#      - traefiknet
+#    labels:
+#      - "traefik.enable=false"
+#      - "traefik.http.routers.cadvisor.rule=Host(`URL1_SAN`)"
+#      - "traefik.http.routers.cadvisor.entrypoints=websecure"
+#      - "traefik.http.routers.cadvisor.tls=true"
+#
   grafana:
     image: grafana/grafana
     networks:
