@@ -151,6 +151,7 @@ sudo apt-get install -y \
 
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 
+#verify release version
 lsb_release -cs 
 
 echo "deb [arch=armhf] https://download.docker.com/linux/debian \
