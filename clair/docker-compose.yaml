@@ -5,11 +5,12 @@ services:
       container_name: clair
       build:
           context: .
-      image: local/clair:v2.1.2
+      image: local/arm32v6-clair:v2.1.2
       volumes:
           - ./config.yaml:/etc/clair/config.yaml
       networks:
           - traefiknet
+          - cn
       labels:
         - "traefik.enable=true"
         - "traefik.http.routers.clair.rule=Host(`${URL0_SAN}`)"
@@ -18,9 +19,11 @@ services:
         - "traefik.http.routers.clair.tls.certresolver=mydnschallenge"      
 
     postgres:
-      image: postgres
+      image:  arm32v6/postgres
       container_name: clairdb
-      hostname: clairdb
+      
+      networks:
+        - cn
       #volumes:
       #  - cldb:/var/lib/postgresql/data
       environment:
@@ -31,6 +34,8 @@ services:
 networks:
   traefiknet:
     external: true
+  cn: 
+    internal: true
 
 volumes:
   cldb:
