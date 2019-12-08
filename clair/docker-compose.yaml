@@ -8,9 +8,13 @@ services:
           - ./config.yaml:/config/config.yaml
       networks:
           - traefik
-      environment:
-          - POSTGRES_PASSWORD=${DB_PASS}
-  
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.clair.rule=Host(`${URL0_SAN}`)"
+      - "traefik.http.routers.clair.entrypoints=websecure"
+      - "traefik.http.routers.clair.tls=true"
+      - "traefik.http.routers.clair.tls.certresolver=mydnschallenge"      
+
     postgres:
       image: postgres
       volumes:
