@@ -21,7 +21,6 @@ services:
     postgres:
       image:  arm32v6/postgres
       container_name: clairdb
-      
       networks:
         - cn
       #volumes:
