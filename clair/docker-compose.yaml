@@ -7,7 +7,7 @@ services:
       volumes:
           - ./config.yaml:/config/config.yaml
       networks:
-          - traefik
+          - traefiknet
       labels:
         - "traefik.enable=true"
         - "traefik.http.routers.clair.rule=Host(`${URL0_SAN}`)"
@@ -25,7 +25,7 @@ services:
         POSTGRES_DB: clair
 
 networks:
-  traefik:
+  traefiknet:
     external: true
 
 volumes:
