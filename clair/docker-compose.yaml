@@ -20,6 +20,7 @@ services:
     postgres:
       image: postgres
       container_name: clairdb
+      hostname: clairdb
       #volumes:
       #  - cldb:/var/lib/postgresql/data
       environment:
