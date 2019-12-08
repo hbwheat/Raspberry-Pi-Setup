@@ -2,14 +2,14 @@ version: "3.3"
 
 services:
     clair: 
-        image: quay.io/coreos/clair:v2.1.2
-        container_name: clair
-        volumes:
-            - ./config.yaml:/config/config.yaml
-        networks:
-            - traefik
-        envioronment:
-            - POSTGRES_PASSWORD=${DB_PASS}
+      image: quay.io/coreos/clair:v2.1.2
+      container_name: clair
+      volumes:
+          - ./config.yaml:/config/config.yaml
+      networks:
+          - traefik
+      environment:
+          - POSTGRES_PASSWORD=${DB_PASS}
   
     postgres:
       image: postgres
