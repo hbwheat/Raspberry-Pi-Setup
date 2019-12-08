@@ -17,8 +17,8 @@ services:
 
     postgres:
       image: postgres
-      volumes:
-        - cldb:/var/lib/postgresql/data
+      #volumes:
+      #  - cldb:/var/lib/postgresql/data
       environment:
         POSTGRES_USER: ${DB_USER}
         POSTGRES_PASSWORD: ${DB_PASS}
