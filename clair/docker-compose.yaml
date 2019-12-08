@@ -19,7 +19,7 @@ services:
         - "traefik.http.routers.clair.tls.certresolver=mydnschallenge"      
 
     postgres:
-      image:  arm32v6/postgres
+      image: arm32v7/postgres
       container_name: clairdb
       networks:
         - cn
