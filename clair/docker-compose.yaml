@@ -8,12 +8,12 @@ services:
           - ./config.yaml:/config/config.yaml
       networks:
           - traefik
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.clair.rule=Host(`${URL0_SAN}`)"
-      - "traefik.http.routers.clair.entrypoints=websecure"
-      - "traefik.http.routers.clair.tls=true"
-      - "traefik.http.routers.clair.tls.certresolver=mydnschallenge"      
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.clair.rule=Host(`${URL0_SAN}`)"
+        - "traefik.http.routers.clair.entrypoints=websecure"
+        - "traefik.http.routers.clair.tls=true"
+        - "traefik.http.routers.clair.tls.certresolver=mydnschallenge"      
 
     postgres:
       image: postgres
