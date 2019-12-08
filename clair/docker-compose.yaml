@@ -2,8 +2,10 @@ version: "3.3"
 
 services:
     clair: 
-      image: quay.io/coreos/clair:v2.1.2
       container_name: clair
+      build:
+          context: .
+      image: local/clair:v2.1.2
       volumes:
           - ./config.yaml:/config/config.yaml
       networks:
