@@ -39,4 +39,4 @@ scrape_configs:
     scrape_interval: 15s
     static_configs:
       - targets:
-        - helium:9182
+        - 192.168.1.163:9182
