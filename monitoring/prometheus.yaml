@@ -34,3 +34,9 @@ scrape_configs:
     static_configs:
       - targets:
         - vault:8082
+
+  - job_name: 'helium'
+    scrape_interval: 5s
+    static_configs:
+      - targets:
+        - helium:9182
