@@ -19,7 +19,8 @@ services:
       - traefiknet
       - monitor
     dns:
-      - pihole # use pihole to server dns resolution for outside services that will be polled by prometheus
+      - pihole  # resolution works in container via nslookup however prom is not resolving the hostname/connecting
+                # use pihole to server dns resolution for outside services that will be polled by prometheus
     expose:
       - 9090
     labels:
