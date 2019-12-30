@@ -14,7 +14,7 @@ services:
     volumes:
       - ./prometheus.yaml:/etc/prometheus/prometheus.yaml
       #- prometheus-data:/etc/prometheus/ #configs dir
-      #- prometheus-data:/var/lib/prometheus #db dir
+      - prometheus-data:/var/lib/prometheus #db dir
     networks:
       - traefiknet
       - monitor
