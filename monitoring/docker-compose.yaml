@@ -19,8 +19,7 @@ services:
       - traefiknet
       - monitor
     dns:
-      - pihole # getting dns resolution to work for outside services aht will be polled by prometheus
-      - 127.0.0.11 # internal docker dns
+      - pihole # getting dns resolution to work for outside services that will be polled by prometheus
     expose:
       - 9090
     labels:
