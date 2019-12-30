@@ -81,3 +81,6 @@ networks:
       external: true
     monitor:
       external: true
+
+volumes:
+   prometheus-data:
