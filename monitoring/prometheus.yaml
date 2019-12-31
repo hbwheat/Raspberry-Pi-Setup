@@ -35,8 +35,14 @@ scrape_configs:
       - targets:
         - vault:8082
 
-  - job_name: 'helium'
+  - job_name: 'helium-general'
     scrape_interval: 15s
     static_configs:
       - targets:
         - 192.168.1.163:9182
+
+  - job_name: 'helium-hardware'
+    scrape_interval: 15s
+    static_configs:
+      - targets:
+        - 192.168.1.163:9183
