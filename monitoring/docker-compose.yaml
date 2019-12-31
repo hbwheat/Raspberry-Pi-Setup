@@ -10,7 +10,7 @@ services:
       - "--config.file=/etc/prometheus/prometheus.yaml" #set config file on startup
       - "--storage.tsdb.path=/prometheus" #set below via container volume
       - "--storage.tsdb.retention=30d"
-      - "--web.enable-lifecycle=true" # curl -kX POST http://localhost:9090/-/reload to reload config file
+      - '--web.enable-lifecycle' # curl -kX POST http://localhost:9090/-/reload to reload config file
                                       # curl -kX POST https://${URL0_SAN}/-/reload
     volumes:
       - ./prometheus.yaml:/etc/prometheus/prometheus.yaml
