@@ -8,16 +8,20 @@ services:
     restart: always
     command:
       - "--config.file=/etc/prometheus/prometheus.yaml" #set config file on startup
-      - "--storage.tsdb.path=/prometheus"
-      - "--web.enable-lifecycle" # curl -kX POST http://localhost:9090/-/reload to reload config file
-                                 # curl -kX POST https://${URL0_SAN}.com/-/reload
+      - "--storage.tsdb.path=/prometheus" #set below via container volume
+      - "--storage.tsdb.retention=30d"
+      - '--web.enable-lifecycle' # curl -kX POST http://localhost:9090/-/reload to reload config file
+                                      # curl -kX POST https://${URL0_SAN}/-/reload
     volumes:
       - ./prometheus.yaml:/etc/prometheus/prometheus.yaml
       #- prometheus-data:/etc/prometheus/ #configs dir
-      #- prometheus-data:/var/lib/prometheus #db dir
+      - prometheus-data:/prometheus #data dir
     networks:
       - traefiknet
       - monitor
+    dns:
+      - pihole  # resolution works in container via nslookup however prom is not resolving the hostname/connecting
+                # use pihole to server dns resolution for outside services that will be polled by prometheus
     expose:
       - 9090
     labels:
@@ -81,3 +85,6 @@ networks:
       external: true
     monitor:
       external: true
+
+volumes:
+   prometheus-data:

@@ -58,7 +58,7 @@ Remember .env files use a simple key-value pair and docker-compose will pull the
 
  Some things to note: 
  - We Set Docker to the "traefiknet" network created outside of the compose file
-    - ``` docker create network treafiknet ```
+    - ``` docker create network traefiknet ```
 - Traefik is set to not automatically route to containers.
     - We have to enable this by by using ``` traefik.enable=true ``` label .
 

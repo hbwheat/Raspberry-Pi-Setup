@@ -10,19 +10,21 @@ mkdir data/dnsmasq.d
 
 The etc-pihole folder will hold persistent data. We'll add a new config to the dnsmasq.d direcotry to act like split-brain dns for a domain. In my case hbwheat.dev.
 
-Create a single text file with a line telling the pihole dns to send all dns traffic based on teh wild card *.hbwheat.dev towards the ip of the server. I'll also add a .list file for reference in the persistent data folder for future use. This will allow me to define IPs as necessary and be served by the pihole dns server.
+Create a single text file with a line telling the pihole dns to send all dns traffic based on the wild card *.hbwheat.dev towards the ip of the server. I'll also add a .list file for reference in the persistent data folder for future use. This will allow me to define IPs as necessary and be served by the pihole dns server.
 
 DNSMASQ will look to this directory for any configuration files. 
 
-file name: 02-pihole.conf added the following:
+file name: 02-pihole.conf added the following in srv/containers/pihole/data/dnsmasq.d/02-pihole.conf:
+
 ```
 addn-hosts=/etc/pihole/01.locallan.list
 address=/hbwheat.dev/192.168.1.12
 ```
+This creates our wildcard scenario and directs traffic towards our destination via DNS. 
 
 ## Local DNS Settings
 You can define custom dns entries using a .list files and configuring DNSMASQ to look at this list for DNS requests. 
-Make sure you put the .list file in "/srv/containers/pihole/etc-pihole/". 
+Make sure you put the .list file in "/srv/containers/pihole/data/etc-pihole/*.list". 
 
 Add any local dns records to the "01.locallan.list". 
 
