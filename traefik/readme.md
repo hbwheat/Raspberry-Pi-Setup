@@ -42,6 +42,14 @@ URL0_SAN=
 URL_IP=
 ```
 
+```URL0_SAN``` defines a designation for Traefik to route based on a http request for an address. ```URL0``` is simply the first URL to route ie ```traefik.site.local``` , and ```URL_IP``` is the IP address for routing as well ie ```192.168.1.12```. 
+
+When a request hits traefik at ```traefik.site.local``` traefik will route to the service identified in the docker-compose file label.
+
+Refer to the docker-compose.yaml file labels section: ```- "traefik.http.routers.api.rule=Host(`${URL0_SAN}`)"```
+
+Remember .env files use a simple key-value pair and docker-compose will pull the value from the key associated with ```$``` or ```${key}```. 
+
  ## Providers
 
  ### Docker
