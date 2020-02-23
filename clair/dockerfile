@@ -1,0 +1,23 @@
+#source https://github.com/quay/clair/blob/master/Dockerfile
+
+FROM arm32v6/golang:1.13-alpine AS build
+RUN apk add --no-cache git build-base
+RUN mkdir -p go/clair/
+WORKDIR /go/clair/
+RUN git clone https://github.com/quay/clair.git . && \
+git checkout tags/v2.1.2
+RUN export CLAIR_VERSION=$(git describe --tag --always --dirty) && \
+	env GOOS=linux GOARCH=arm go build -ldflags "-X github.com/quay/clair/v3/pkg/version.Version=$CLAIR_VERSION" ./cmd/clair
+
+FROM arm32v6/alpine:3.10
+COPY --from=build /go/clair/clair /clair
+RUN apk add --no-cache git rpm xz ca-certificates dumb-init
+
+# change ownership of ssl directory to allow custom cert in OpenShift
+#RUN chgrp -R 0 /etc/ssl/certs && \
+#    chmod -R g=u /etc/ssl/certs
+    
+ENTRYPOINT ["/usr/bin/dumb-init", "--", "/clair"]
+VOLUME /config
+EXPOSE 6060 6061
+

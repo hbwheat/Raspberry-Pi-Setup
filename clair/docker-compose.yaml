@@ -1,0 +1,40 @@
+version: "3.3"
+
+services:
+    clair: 
+      container_name: clair
+      build:
+          context: .
+      image: local/arm32v6-clair:v2.1.2
+      volumes:
+          - ./config.yaml:/etc/clair/config.yaml
+      networks:
+          - traefiknet
+          - cn
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.clair.rule=Host(`${URL0_SAN}`)"
+        - "traefik.http.routers.clair.entrypoints=websecure"
+        - "traefik.http.routers.clair.tls=true"
+        - "traefik.http.routers.clair.tls.certresolver=mydnschallenge"      
+
+    postgres:
+      image: arm32v7/postgres
+      container_name: clairdb
+      networks:
+        - cn
+      #volumes:
+      #  - cldb:/var/lib/postgresql/data
+      environment:
+        POSTGRES_USER: ${DB_USER}
+        POSTGRES_PASSWORD: ${DB_PASS}
+        POSTGRES_DB: clair
+
+networks:
+  traefiknet:
+    external: true
+  cn: 
+    internal: true
+
+volumes:
+  cldb:
