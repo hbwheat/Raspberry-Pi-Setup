@@ -45,11 +45,13 @@ services:
       - '--path.procfs=/host/proc'
       - '--path.rootfs=/rootfs'
       - '--path.sysfs=/host/sys'
+      - '--collector.logind'
+      - '--collector.processes'
       - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc|srv|media)($$|/)'
     restart: unless-stopped
 
   grafana:
-    image: grafana/grafana:6.5.0-beta1
+    image: grafana/grafana:6.7.1
     networks:
       - traefiknet
       - monitor
