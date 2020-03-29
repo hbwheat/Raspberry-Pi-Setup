@@ -4,6 +4,7 @@ services:
   vault:
     image: arm32v6/vault
     container_name: vault
+    restart: always
     hostname: vault
     command:
       - "server"
