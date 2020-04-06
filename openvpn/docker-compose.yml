@@ -6,7 +6,7 @@ networks:
 
 services:
   openvpn-as:
-    image: linuxserver/openvpn-as
+    image: hbwheat/openvpn-as:armhf
     container_name: openvpn-as
     cap_add:
       - NET_ADMIN
