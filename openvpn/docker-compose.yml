@@ -6,7 +6,7 @@ networks:
 
 services:
   openvpn-as:
-    image: linuxserver/openvpn-as:arm64
+    image: linuxserver/openvpn-as
     container_name: openvpn-as
     cap_add:
       - NET_ADMIN
