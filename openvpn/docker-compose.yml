@@ -1,5 +1,9 @@
 version: "2"
 
+networks:
+  traefiknet: 
+    external: true
+
 services:
   openvpn-as:
     image: linuxserver/openvpn-as:arm64
@@ -12,12 +16,14 @@ services:
       - TZ=America/New_York
       #- INTERFACE=eth0 #optional
     volumes:
-      - data/config:/config
+      - ./data/config:/config
     ports:
       #- 943:943
       #- 9443:9443
       - 1194:1194/udp
     restart: always
+    networks:
+      - traefiknet
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.ovpn.rule=Host(`${URL0_SAN}`)"
