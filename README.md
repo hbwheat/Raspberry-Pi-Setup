@@ -43,7 +43,7 @@ sudo raspi-config
 
 ### Static IP
 
-To set a static IP we'll need to edit the ``` vi /etc/dhcpd.conf ``` file.
+To set a static IP we'll need to edit the ``` vi /etc/dhcpcd.conf ``` file.
 
 Default files: 
 
